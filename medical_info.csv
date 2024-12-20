@@ -1,0 +1,5 @@
+ABHA_ID,Condition,Medications,LabResults,LastVisitDate
+ABHA123456,Hypertension,Amlodipine,BP: 140/90,2023-12-15
+ABHA654321,Diabetes,Metformin,HbA1c: 7.2%,2023-11-20
+ABHA987654,Asthma,Salbutamol,Spirometry: Mild Obstruction,2023-10-05
+ABHA456789,No significant issues,None,All tests normal,2023-12-01

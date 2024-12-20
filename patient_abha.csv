@@ -1,0 +1,5 @@
+PatientID,Name,Age,Gender,ABHA_ID
+P001,Ramesh Kumar,55,Male,ABHA123456
+P002,Sita Verma,42,Female,ABHA654321
+P003,Amit Shah,60,Male,ABHA987654
+P004,Priya Mehta,38,Female,ABHA456789
