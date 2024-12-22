@@ -24,7 +24,7 @@ def summarize_text_with_gemini(text):
 # Function to save text to a file with a timestamped name
 def save_text_to_file(text, prefix="summary"):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"{prefix}_{timestamp}.txt"
+    filename = f"{prefix}.txt"
     with open(filename, "w", encoding="utf-8") as file:
         file.write(text)
     print(f"[INFO] Text saved to file: {filename}")
