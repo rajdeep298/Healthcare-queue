@@ -2,6 +2,8 @@ import os
 from transformers import pipeline
 import re
 
+from Server.server import medical_info
+
 # Suppress TensorFlow warnings and info logs (optional)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppresses info and warnings, keeps errors
 
@@ -16,9 +18,8 @@ url = 'http://localhost:5000/getMedicalInfo?abha_id=ABHA123456'
 # Send a GET request to fetch the medical info
 response = requests.get(url)
 
-# with open("Speech-to-Text/summary.txt", "r") as file:
-#     recCurr = file.read()
-
+with open("Speech-to-Text/summary.txt", "r") as file:
+    recCurr = file.read()
 
 
 # Check if the request was successful (status code 200)
@@ -29,10 +30,13 @@ if response.status_code == 200:
     # Extract age from the 'Patient Details' part of the response
     patient_details = data.get('Patient Details', {})
     age = int(patient_details.get('Age', None))
-    prcondition = patient_details.get('Condition', None)
-    prlab = patient_details.get('LabResults', None)
-    prmed = patient_details.get('Medications', None)
-    print(prlab,prmed,prcondition)
+
+    medical_info = data.get('Medical Information', {})
+    prcondition = medical_info.get('Condition', "N/A")  # Default to "N/A"
+    prlab = medical_info.get('LabResults', "N/A")  # Default to "N/A"
+    prmed = medical_info.get('Medications', "N/A")  # Default to "N/A"
+
+    # print(prmed,prlab,prcondition)
 
 
 
@@ -86,7 +90,7 @@ def classify_priority(record):
 
 
 # Example records (previous and current symptoms)
-recPrev = "The patient has a history of mild asthma, stable hypertension, and no known kidney issues."
+recPrev = f"The patient's previous medical condition is '{prcondition}' ,lab result is '{prlab}', and prescribed medications are '{prmed}'."
 #recCurr = "The patient is currently experiencing severe abdominal pain, nausea, and vomiting. The physician suspects acute appendicitis and recommends surgical intervention."
 
 
@@ -123,8 +127,8 @@ try:
 
     # Running the zero-shot classification to validate priority using model
     result = classifier(combined_record, candidate_labels=labels)
-    print("Zero-shot Classification Result:")
-    print(result)
+    # print("Zero-shot Classification Result:")
+    # print(result)
 
 except Exception as e:
     print(f"Error: {e}")

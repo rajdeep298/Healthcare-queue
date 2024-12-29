@@ -2,10 +2,18 @@ from datetime import datetime
 import os
 import speech_recognition as sr
 import google.generativeai as genai
-
+import shutil
 # Configure the Gemini API with your API key
 genai.configure(api_key="AIzaSyBvUC-yJ31i1N_4KpSITDC_x_XzbMWgzsk")
 
+
+# Source and destination paths
+source = r"C:\Users\rajde\Dropbox\PC (2)\Downloads\hackathon_audio.wav"
+destination = r"D:\Healthcare-queue\Speech-to-Text\AudioFiles\Recording.wav"
+
+# Copy the file
+shutil.copy(source, destination)
+print(f"File copied to {destination}")
 
 # Function to summarize text using Google's Gemini API
 def summarize_text_with_gemini(text):

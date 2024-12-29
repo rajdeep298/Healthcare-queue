@@ -10,8 +10,8 @@ if response.status_code == 200:
 
         # Access patient details
         patient_details = data.get('Patient Details', {})
-        medical_info = data.get('Medical Information', {})
         age = int(patient_details.get('Age', 0))  # Default to 0 if 'Age' is missing
+        medical_info = data.get('Medical Information', {})
         prcondition = medical_info.get('Condition', "N/A")  # Default to "N/A"
         prlab = medical_info.get('LabResults', "N/A")  # Default to "N/A"
         prmed = medical_info.get('Medications', "N/A")  # Default to "N/A"
